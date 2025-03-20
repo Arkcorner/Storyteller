@@ -7,7 +7,7 @@ public class CameraController_01 : MonoBehaviour
     public Transform target;
     private Vector3 vel = Vector3.zero;
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         Vector3 targetPosition = target.position + offset;
         targetPosition.z = transform.position.z;
