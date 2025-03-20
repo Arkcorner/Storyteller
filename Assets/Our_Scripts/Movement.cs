@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return) && !isMoving)
+        if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
         {
             isMoving = true;
             distanceMoved = 0f;
