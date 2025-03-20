@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using HuggingFace.API;
 using TMPro;
@@ -9,7 +10,8 @@ public class SpeechRecognitionTest : MonoBehaviour
     [SerializeField] private Button startButton;
     [SerializeField] private Button stopButton;
     [SerializeField] private TextMeshProUGUI text;
-
+    private String testText;
+    private String processedText;
     private AudioClip clip;
     private byte[] bytes;
     private bool recording;
@@ -20,6 +22,7 @@ public class SpeechRecognitionTest : MonoBehaviour
         stopButton.onClick.AddListener(StopRecording);
         stopButton.interactable = false;
         Debug.Log("Starting");
+        testText = "hello";
     }
 
     private void Update()
@@ -63,6 +66,7 @@ public class SpeechRecognitionTest : MonoBehaviour
             text.color = Color.white;
             text.text = response;
             startButton.interactable = true;
+            CheckText(response);
         }, error =>
         {
             text.color = Color.red;
@@ -70,6 +74,19 @@ public class SpeechRecognitionTest : MonoBehaviour
             startButton.interactable = true;
         });
         Debug.Log("Sent things");
+    }
+
+    private void CheckText(String saidText)
+    {
+        processedText = saidText.ToLower();
+        if (processedText == testText)
+        {
+            Debug.Log("Texxt matched");
+        }
+        else
+        {
+            Debug.Log("Text Mismatch try again");
+        }
     }
 
     private byte[] EncodeAsWAV(float[] samples, int frequency, int channels)
