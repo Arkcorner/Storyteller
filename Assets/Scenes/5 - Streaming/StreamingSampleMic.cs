@@ -13,7 +13,7 @@ namespace Whisper.Samples
     {
         public static int CurrentSegment;
         public static bool CanAdvance = false;
-        public string[] StorySegments = { "hello", "there" };
+        public string[] StorySegments = { "hello", "world" };
         public WhisperManager whisper;
         public MicrophoneRecord microphoneRecord;
 
