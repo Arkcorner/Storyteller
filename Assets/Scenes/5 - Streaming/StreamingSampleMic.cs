@@ -1,3 +1,5 @@
+using System;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
 using Whisper.Utils;
@@ -9,6 +11,9 @@ namespace Whisper.Samples
     /// </summary>
     public class StreamingSampleMic : MonoBehaviour
     {
+        public static int CurrentSegment;
+        public static bool CanAdvance = false;
+        public string[] StorySegments = { "hello", "there" };
         public WhisperManager whisper;
         public MicrophoneRecord microphoneRecord;
 
@@ -16,7 +21,6 @@ namespace Whisper.Samples
         public Button button;
         public Text buttonText;
         public Text text;
-        public Text displayText;
         public ScrollRect scroll;
         private WhisperStream _stream;
 
@@ -73,17 +77,26 @@ namespace Whisper.Samples
         }
         private void MatchText(string text)
         {
+            var numbError = 0;
             var processedText = text.ToLower();
             print("Text is being compared");
-            if (processedText.Contains("hello"))
+            for (int n = 0; n < StorySegments.Length; n++)
             {
-                displayText.text = "Text has been matched";
-                print("Text has matched");
+                if (processedText.Contains(StorySegments[n]))
+                {
+                    print("Text has matched" + StorySegments[n]);
+                    CanAdvance = true;
+                }
+                else
+                {
+                    print("Text doesnt Match");
+                    numbError++;
+                }
 
             }
-            else
+            if (numbError > 0)
             {
-                displayText.text = "Text doesnt Match";
+                CanAdvance = false;
             }
         }
     }

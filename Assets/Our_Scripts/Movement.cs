@@ -1,4 +1,5 @@
 using UnityEngine;
+using Whisper.Samples;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
+        if (Input.GetKeyDown(KeyCode.Space) && !isMoving && StreamingSampleMic.CanAdvance)
         {
             isMoving = true;
             distanceMoved = 0f;
