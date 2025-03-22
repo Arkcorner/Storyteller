@@ -11,11 +11,12 @@ namespace Whisper.Samples
     {
         public WhisperManager whisper;
         public MicrophoneRecord microphoneRecord;
-    
-        [Header("UI")] 
+
+        [Header("UI")]
         public Button button;
         public Text buttonText;
         public Text text;
+        public Text displayText;
         public ScrollRect scroll;
         private WhisperStream _stream;
 
@@ -40,34 +41,50 @@ namespace Whisper.Samples
             }
             else
                 microphoneRecord.StopRecord();
-        
+
             buttonText.text = microphoneRecord.IsRecording ? "Stop" : "Record";
         }
-    
+
         private void OnRecordStop(AudioChunk recordedAudio)
         {
             buttonText.text = "Record";
         }
-    
+
         private void OnResult(string result)
         {
             text.text = result;
             UiUtils.ScrollDown(scroll);
         }
-        
+
         private void OnSegmentUpdated(WhisperResult segment)
         {
             print($"Segment updated: {segment.Result}");
         }
-        
+
         private void OnSegmentFinished(WhisperResult segment)
         {
             print($"Segment finished: {segment.Result}");
+            MatchText(segment.Result);
         }
-        
+
         private void OnFinished(string finalResult)
         {
             print("Stream finished!");
+        }
+        private void MatchText(string text)
+        {
+            var processedText = text.ToLower();
+            print("Text is being compared");
+            if (processedText.Contains("hello"))
+            {
+                displayText.text = "Text has been matched";
+                print("Text has matched");
+
+            }
+            else
+            {
+                displayText.text = "Text doesnt Match";
+            }
         }
     }
 }
