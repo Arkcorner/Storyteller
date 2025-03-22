@@ -19,6 +19,7 @@ namespace Whisper.Samples
 
         [Header("UI")]
         public Button button;
+        public Button button2;
         public Text buttonText;
         public Text text;
         public ScrollRect scroll;
@@ -34,6 +35,7 @@ namespace Whisper.Samples
 
             microphoneRecord.OnRecordStop += OnRecordStop;
             button.onClick.AddListener(OnButtonPressed);
+            button2.onClick.AddListener(OnButtonPressed);
         }
 
         private void OnButtonPressed()

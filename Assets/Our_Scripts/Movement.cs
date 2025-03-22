@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isMoving = true;
             distanceMoved = 0f;
+            StreamingSampleMic.CanAdvance = false;
         }
 
         if (isMoving)

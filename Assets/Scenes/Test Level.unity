@@ -419,7 +419,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 959.7023, y: -233.2109}
+  m_AnchoredPosition: {x: 959.7023, y: -233.211}
   m_SizeDelta: {x: 1855.4045, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &374784058
@@ -992,7 +992,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1512957960}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999791
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1464,11 +1464,15 @@ PrefabInstance:
     - target: {fileID: 1830672719036882977, guid: b735cbe797d2e477eb2f5fa695074e8d, type: 3}
       propertyPath: button
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2139055319}
     - target: {fileID: 1830672719036882977, guid: b735cbe797d2e477eb2f5fa695074e8d, type: 3}
       propertyPath: scroll
       value: 
       objectReference: {fileID: 465342938}
+    - target: {fileID: 1830672719036882977, guid: b735cbe797d2e477eb2f5fa695074e8d, type: 3}
+      propertyPath: button2
+      value: 
+      objectReference: {fileID: 1659243998}
     - target: {fileID: 1830672719036882977, guid: b735cbe797d2e477eb2f5fa695074e8d, type: 3}
       propertyPath: whisper
       value: 
