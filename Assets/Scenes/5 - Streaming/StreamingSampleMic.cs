@@ -12,6 +12,7 @@ namespace Whisper.Samples
     /// </summary>
     public class StreamingSampleMic : MonoBehaviour
     {
+        private System.Collections.Generic.HashSet<string> matchedWords = new System.Collections.Generic.HashSet<string>();
         public string[][] StorySegments = new string[][]
    {
         new string[] { "the", "wind", "howled", "through", "the", "ancient", "ruins" },
@@ -83,6 +84,7 @@ namespace Whisper.Samples
         public ScrollRect scroll;
         private WhisperStream _stream;
 
+
         private async void Start()
         {
             _stream = await whisper.CreateStream(microphoneRecord);
@@ -144,21 +146,43 @@ namespace Whisper.Samples
         }
         private void MatchText(string text)
         {
+
             var numbError = 0;
             var processedText = text.ToLower();
+            string resultText = "";
+            bool allMatched = true;
             print("Text is being compared");
             foreach (string word in StorySegments[CurrentSegment])
             {
-                if (processedText.Contains(word))
+                if (matchedWords.Contains(word.ToLower()))
+                {
+                    // If the word was already matched, keep it stricken through
+                    resultText += $"<s>{word}</s> ";
+                }
+                else if (processedText.Contains(word))
                 {
                     print("Text has matched" + word);
+                    matchedWords.Add(word.ToLower());
+                    resultText += $"<s>{word}</s> ";
                 }
                 else
                 {
                     print("Text doesnt Match" + word);
                     numbError++;
+                    resultText += $"{word} ";
+                    allMatched = false;
                 }
             }
+            if (allMatched)
+            {
+                print("All words matched! Resetting for the next segment...");
+                matchedWords.Clear(); // Reset matched words list
+            }
+            // Trim any trailing space
+            resultText = resultText.Trim();
+            // Assign new text to both Text fields
+            fadeText.text1.text = resultText;
+            fadeText.text2.text = resultText;
             if (numbError > 0)
             {
                 CanAdvance = false;
@@ -173,7 +197,10 @@ namespace Whisper.Samples
                     CanAdvance = true;
                     fadeText.StartFadeOut1();
                     fadeText.StartFadeIn2();
+                    //Change text in fields back to Actual story
+                    fadeText.text1.text = Story[CurrentSegment];
                     Walkable.color = visible;
+                    fadeText.text2.text = Story[CurrentSegment + 1];
                     print("Appearing 2");
                 }
                 else
@@ -182,6 +209,7 @@ namespace Whisper.Samples
                     CanAdvance = true;
                     fadeText.StartFadeOut2();
                     fadeText.StartFadeIn1();
+                    //Change text in fields back to Actual story
                     fadeText.text1.text = Story[CurrentSegment];
                     Walkable.color = visible;
                     fadeText.text2.text = Story[CurrentSegment + 1];

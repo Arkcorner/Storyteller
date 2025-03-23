@@ -1,21 +1,22 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 public class TextDisaperance : MonoBehaviour
 {
 
-    public Text text1; // Assign your UI Text component
-    public Text text2; // Assign your UI Text component
+    public TMP_Text text1; // Assign your UI Text component
+    public TMP_Text text2; // Assign your UI Text component
 
     public float fadeDuration = 2f;
 
     void Start()
     {
         if (text1 == null)
-            text1 = GetComponent<Text>();
+            text1 = GetComponent<TMP_Text>();
         if (text2 == null)
-            text2 = GetComponent<Text>();
+            text2 = GetComponent<TMP_Text>();
     }
 
     public void StartFadeOut1()
@@ -35,7 +36,7 @@ public class TextDisaperance : MonoBehaviour
         StartCoroutine(FadeInText(text2));
     }
 
-    private IEnumerator FadeOutText(Text text)
+    private IEnumerator FadeOutText(TMP_Text text)
     {
         Color originalColor = text.color;
         float elapsedTime = 0f;
@@ -50,7 +51,7 @@ public class TextDisaperance : MonoBehaviour
 
         text.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f); // Ensure it's fully transparent
     }
-    private IEnumerator FadeInText(Text text)
+    private IEnumerator FadeInText(TMP_Text text)
     {
         Color originalColor = text.color;
         float elapsedTime = 0f;
