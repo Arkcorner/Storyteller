@@ -15,7 +15,7 @@ namespace Whisper.Samples
         private System.Collections.Generic.HashSet<string> matchedWords = new System.Collections.Generic.HashSet<string>();
         public string[][] StorySegments = new string[][]
    {
-        new string[] { "the", "wind", "howled", "through", "the", "ancient", "ruins" },
+        new string[] { "the", "wind", "swept", "through", "the", "ancient", "ruins" },
         new string[] { "leaves", "rustled", "like", "whispers", "from", "the", "past" },
         new string[] { "trees", "loomed", "overhead" },
         new string[] { "their", "gnarled", "branches", "clawed", "at", "the", "sky" },
@@ -42,7 +42,7 @@ namespace Whisper.Samples
    };
         public string[] Story =
         {
-        "The wind howled through the ancient ruins.",
+        "The wind swept through the ancient ruins.",
         "Leaves rustled like whispers from the past.",
         "Trees loomed overhead.",
         "Their gnarled branches clawed at the sky.",
