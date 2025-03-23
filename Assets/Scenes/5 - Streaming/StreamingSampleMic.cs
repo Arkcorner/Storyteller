@@ -155,7 +155,7 @@ namespace Whisper.Samples
                 }
                 else
                 {
-                    print("Text doesnt Match");
+                    print("Text doesnt Match" + word);
                     numbError++;
                 }
             }
