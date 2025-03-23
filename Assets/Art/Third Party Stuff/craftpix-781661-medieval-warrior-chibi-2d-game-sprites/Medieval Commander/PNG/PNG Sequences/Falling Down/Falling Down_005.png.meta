@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Falling Down_005_0: 2250137293764654313
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
