@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Slashing_006_0: -3267114482165914987
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -5,12 +5,17 @@ public class CameraController_01 : MonoBehaviour
     [SerializeField] private Vector3 offset;
     [SerializeField] private float damping;
     public Transform target;
-    private Vector3 vel = Vector3.zero;
+
+    
+    private float xVelocity;
 
     private void LateUpdate()
     {
-        Vector3 targetPosition = target.position + offset;
-        targetPosition.z = transform.position.z;
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref vel, damping);
+        
+        float targetX = target.position.x + offset.x;
+
+        float newX = Mathf.SmoothDamp(transform.position.x, targetX, ref xVelocity, damping);
+
+        transform.position = new Vector3(newX, transform.position.y, transform.position.z);
     }
 }
