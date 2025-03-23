@@ -11,9 +11,10 @@ namespace Whisper.Samples
     /// </summary>
     public class StreamingSampleMic : MonoBehaviour
     {
-        public static int CurrentSegment;
+        public TextDisaperance fadeText;
+        public static int CurrentSegment = 0;
         public static bool CanAdvance = false;
-        public string[] StorySegments = { "hello", "world" };
+        public string[] StorySegments0 = { "hello", "world" };
         public WhisperManager whisper;
         public MicrophoneRecord microphoneRecord;
 
@@ -47,13 +48,10 @@ namespace Whisper.Samples
             }
             else
                 microphoneRecord.StopRecord();
-
-            buttonText.text = microphoneRecord.IsRecording ? "Stop" : "Record";
         }
 
         private void OnRecordStop(AudioChunk recordedAudio)
         {
-            buttonText.text = "Record";
         }
 
         private void OnResult(string result)
@@ -82,12 +80,11 @@ namespace Whisper.Samples
             var numbError = 0;
             var processedText = text.ToLower();
             print("Text is being compared");
-            for (int n = 0; n < StorySegments.Length; n++)
+            for (int n = 0; n < StorySegments0.Length; n++)
             {
-                if (processedText.Contains(StorySegments[n]))
+                if (processedText.Contains(StorySegments0[n]))
                 {
-                    print("Text has matched" + StorySegments[n]);
-                    CanAdvance = true;
+                    print("Text has matched" + StorySegments0[n]);
                 }
                 else
                 {
@@ -99,6 +96,25 @@ namespace Whisper.Samples
             if (numbError > 0)
             {
                 CanAdvance = false;
+            }
+            else
+            {
+                print("Story can proceed");
+                CurrentSegment++;
+                if (CurrentSegment % 2 == 0)
+                {
+                    CanAdvance = true;
+                    fadeText.StartFadeOut1();
+                    fadeText.StartFadeIn2();
+                    print("Appearing 2");
+                }
+                else
+                {
+                    print("Appearing 1");
+                    CanAdvance = true;
+                    fadeText.StartFadeOut2();
+                    fadeText.StartFadeIn1();
+                }
             }
         }
     }
