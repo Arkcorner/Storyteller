@@ -1,6 +1,3 @@
-using System;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
 using Whisper.Utils;
@@ -10,64 +7,90 @@ namespace Whisper.Samples
     /// <summary>
     /// Stream transcription from microphone input.
     /// </summary>
+    /// TODO: Add Feedback for Things working in the background maybe a throbber, add audio feedback, Translate for German students, Fix UI, Fix bad practices, Implement Mic auto start/stop recording
     public class StreamingSampleMic : MonoBehaviour
     {
         private System.Collections.Generic.HashSet<string> matchedWords = new System.Collections.Generic.HashSet<string>();
+
         public string[][] StorySegments = new string[][]
-   {
-        new string[] { "the", "wind", "swept", "through", "the", "ancient", "ruins" },
-        new string[] { "leaves", "rustled", "like", "whispers", "from", "the", "past" },
-        new string[] { "trees", "loomed", "overhead" },
-        new string[] { "their", "gnarled", "branches", "clawed", "at", "the", "sky" },
-        new string[] { "a", "thick", "mist", "coiled", "around", "the", "ground" },
-        new string[] { "it", "hid", "broken", "stones", "and", "forgotten", "pathways", "from", "long", "ago" },
-        new string[] { "at", "the", "edge", "of", "the", "ruins", "stood", "a", "boy", "named", "leo" },
-        new string[] { "his", "journey", "had", "been", "long" },
-        new string[] { "his", "boots", "were", "worn", "from", "miles", "of", "travel" },
-        new string[] { "determination", "filled", "his", "heart" },
-        new string[] { "beyond", "the", "ruins", "lay", "the", "lost", "library" },
-        new string[] { "it", "held", "knowledge", "long", "forgotten" },
-        new string[] { "it", "could", "change", "everything" },
-        new string[] { "he", "stepped", "through", "ivy-covered", "arches" },
-        new string[] { "crumbling", "walls", "surrounded", "him" },
-        new string[] { "the", "path", "beneath", "his", "feet", "was", "cracked" },
-        new string[] { "roots", "wove", "through", "the", "stone", "like", "grasping", "fingers" },
-        new string[] { "the", "air", "grew", "heavy", "with", "silence" },
-        new string[] { "the", "mist", "thickened", "shifting", "like", "a", "living", "thing" },
-        new string[] { "many", "had", "tried", "to", "reach", "the", "library" },
-        new string[] { "none", "had", "ever", "returned", "the", "same" },
-        new string[] { "leo", "stepped", "inside" },
-        new string[] { "the", "world", "around", "him", "hushed" },
-        new string[] { "the", "real", "journey", "had", "only", "just", "begun" }
-   };
+        {
+            new string[] { "the", "wind", "swept", "through", "the", "ancient", "remains" },
+            new string[] { "the","trees", "cracked", "like", "whispers", "from", "the", "past" },
+            new string[] { "a", "thick", "mist", "coiled", "around", "broken", "stones", "and", "forgotten", "pathways", "from", "long", "ago" },
+            new string[] { "at", "the", "edge", "stood", "leo", "his", "boots", "worn", "from", "miles", "of", "travel", "determination", "filled", "his", "heart" },
+            new string[] { "beyond", "the", "ruins", "lay", "the", "lost", "library", "holding", "knowledge", "that", "could", "change", "everything" },
+            new string[] { "he", "stepped", "through", "ivy","covered", "arches", "roots", "wove", "through", "cracked", "stone", "like", "grasping", "fingers" },
+            new string[] { "the", "mist", "thickened", "shifting", "like", "a", "living", "thing", "many", "had", "sought", "the", "library", "none", "returned", "the", "same" },
+            new string[] { "the", "ruins", "led", "to", "a", "dark", "grove", "where", "an", "ancient", "tree", "stood" },
+            new string[] { "its", "twisted", "bark", "and", "sprawling", "roots", "formed", "a", "gate" },
+            new string[] { "to", "pass", "one", "had", "to", "give", "a", "truth", "buried", "deep", "within", "the", "heart" },
+            new string[] { "leo", "spoke", "his", "truth", "and", "the", "roots", "parted" },
+            new string[] { "beyond", "stood", "a", "stone", "door", "covered", "in", "glowing", "symbols" },
+            new string[] { "a", "riddle", "was", "carved", "at", "the", "top", "he", "studied", "it", "carefully", "the", "answer", "was", "silence" },
+            new string[] { "the", "door", "groaned", "open" },
+            new string[] { "inside", "the", "path", "split" },
+            new string[] { "to", "the", "left", "a", "golden", "chest", "with", "a", "gleaming", "sword", "atop", "it" },
+            new string[] { "to", "the", "right", "an", "old", "book", "on", "a", "pedestal", "its", "cover", "worn", "but", "pulsing", "with", "quiet", "power" },
+            new string[] { "he", "made", "his", "choice", "and", "walked", "on" },
+            new string[] { "finally", "he", "smelled", "old", "paper" },
+            new string[] { "the", "lost", "library", "stood", "before", "him", "its", "great", "doors", "creaking", "open" },
+            new string[] { "shelves", "stretched", "endlessly", "into", "shadows" },
+            new string[] { "leo", "stepped", "inside" },
+            new string[] { "the", "real", "journey", "had", "only", "just", "begun" }
+        };
         public string[] Story =
         {
-        "The wind swept through the ancient ruins.",
-        "Leaves rustled like whispers from the past.",
-        "Trees loomed overhead.",
-        "Their gnarled branches clawed at the sky.",
-        "A thick mist coiled around the ground.",
-        "It hid broken stones and forgotten pathways from long ago.",
-        "At the edge of the ruins stood a boy named Leo.",
-        "His journey had been long.",
-        "His boots were worn from miles of travel.",
-        "Determination filled his heart.",
-        "Beyond the ruins lay the Lost Library.",
-        "It held knowledge long forgotten.",
-        "It could change everything.",
-        "He stepped through ivy-covered arches.",
-        "Crumbling walls surrounded him.",
-        "The path beneath his feet was cracked.",
-        "Roots wove through the stone like grasping fingers.",
-        "The air grew heavy with silence.",
-        "The mist thickened, shifting like a living thing.",
-        "Many had tried to reach the library.",
-        "None had ever returned the same.",
-        "Leo stepped inside.",
-        "The world around him hushed.",
-        "The real journey had only just begun."
+            "The wind swept through the ancient remains.",
+            "The trees cracked like whispers from the past.",
+            "A thick mist coiled around broken stones and forgotten pathways from long ago.",
+            "At the edge stood Leo, his boots worn from miles of travel. Determination filled his heart.",
+            "Beyond the ruins lay the Lost Library, holding knowledge that could change everything.",
+            "He stepped through ivy covered arches. Roots wove through cracked stone like grasping fingers.",
+            "The mist thickened, shifting like a living thing. Many had sought the library; none returned the same.",
+            "The ruins led to a dark grove where an Ancient Tree stood.",
+            "Its twisted bark and sprawling roots formed a gate.",
+            "To pass, one had to give a truth buried deep within the heart.",
+            "Leo spoke his truth and the roots parted.",
+            "Beyond stood a Stone Door covered in glowing symbols.",
+            "A riddle was carved at the top.He studied it carefully - the answer was silence.",
+            "The door groaned open.",
+            "Inside, the path split.",
+            "To the left, a golden chest with a gleaming sword atop it.",
+            "To the right, an old book on a pedestal, its cover worn but pulsing with quiet power.",
+            "He made his choice and walked on.",
+            "Finally, he smelled old paper.",
+            "The Lost Library stood before him, its great doors creaking open.",
+            "Shelves stretched endlessly into shadows.",
+            "Leo stepped inside.",
+            "The real journey had only just begun."
         };
-        public Color visible = new Color(1f, 1f, 1f, 1f);
+        public string[] Story2 =
+        {
+            "The wind swept through the ancient remains.",
+            "The trees cracked like whispers from the past.",
+            "A thick mist coiled around broken stones and forgotten pathways from long ago.",
+            "At the edge stood Leo, his boots worn from miles of travel. Determination filled his heart.",
+            "Beyond the ruins lay the Lost Library, holding knowledge that could change everything.",
+            "He stepped through ivy covered arches. Roots wove through cracked stone like grasping fingers.",
+            "The mist thickened, shifting like a living thing. Many had sought the library; none returned the same.",
+            "The ruins led to a dark grove where an Ancient Tree stood.",
+            "Its twisted bark and sprawling roots formed a gate.",
+            "To pass, one had to give a truth buried deep within the heart.",
+            "Leo spoke his truth and the roots parted.",
+            "Beyond stood a Stone Door covered in glowing symbols.",
+            "A riddle was carved at the top.He studied it carefully - the answer was silence.",
+            "The door groaned open.",
+            "Inside, the path split.",
+            "To the left, a golden chest with a gleaming sword atop it.",
+            "To the right, an old book on a pedestal, its cover worn but pulsing with quiet power.",
+            "He made his choice and walked on.",
+            "Finally, he smelled old paper.",
+            "The Lost Library stood before him, its great doors creaking open.",
+            "Shelves stretched endlessly into shadows.",
+            "Leo stepped inside.",
+            "The real journey had only just begun."
+        };
+        public Color visible = new Color(1f, 1f, 1f, 0f);
         public Color Invisible = new Color(1f, 1f, 1f, 0f);
         public TextDisaperance fadeText;
         public static int CurrentSegment = 0;
@@ -77,14 +100,47 @@ namespace Whisper.Samples
 
         [Header("UI")]
         public Button button;
-        public SpriteRenderer Walkable;
+        public GameObject SpaceBar;
         public Button button2;
         public Text buttonText;
         public Text text;
         public ScrollRect scroll;
         private WhisperStream _stream;
+        private bool awaitingNext = false;
 
+        private async void Update()
+        {
 
+            if (!CanAdvance && awaitingNext)
+            {
+                if (CurrentSegment % 2 == 0)
+                {
+                    CurrentSegment++;
+                    fadeText.StartFadeOut1();
+                    fadeText.text2.text = Story[CurrentSegment];
+                    fadeText.StartFadeIn2();
+                    //Change text in fields back to Actual story
+                    print("Appearing 2");
+                }
+                else
+                {
+                    CurrentSegment++;
+                    print("Appearing 1");
+                    fadeText.StartFadeOut2();
+                    fadeText.text1.text = Story[CurrentSegment];
+                    fadeText.StartFadeIn1();
+                }
+                awaitingNext = false;
+            }
+            if (CanAdvance)
+            {
+                SpaceBar.SetActive(true);
+            }
+            else
+            {
+                SpaceBar.SetActive(false);
+            }
+        }
         private async void Start()
         {
             _stream = await whisper.CreateStream(microphoneRecord);
@@ -99,13 +155,11 @@ namespace Whisper.Samples
 
             fadeText.text1.text = Story[0];
             fadeText.text2.text = Story[1];
-        }
-        private void Update()
-        {
-            if (CanAdvance)
-            {
-                Walkable.color = Invisible;
-            }
+            //Unity is my curse and this Code needing to exist is its proof damned be the Unity Gods
+            print("This is the Story" + Story.Length);
+            Story = Story;
+            print("This is the Story" + Story2.Length);
+
         }
 
         private void OnButtonPressed()
@@ -146,73 +200,53 @@ namespace Whisper.Samples
         }
         private void MatchText(string text)
         {
-
-            var numbError = 0;
-            var processedText = text.ToLower();
-            string resultText = "";
-            bool allMatched = true;
-            print("Text is being compared");
-            foreach (string word in StorySegments[CurrentSegment])
+            if (!CanAdvance && !awaitingNext)
             {
-                if (matchedWords.Contains(word.ToLower()))
+                var numbError = 0;
+                var processedText = text.ToLower();
+                string resultText = "";
+                bool allMatched = true;
+                print("Text is being compared");
+                foreach (string word in StorySegments[CurrentSegment])
                 {
-                    // If the word was already matched, keep it stricken through
-                    resultText += $"<s>{word}</s> ";
+                    if (matchedWords.Contains(word.ToLower()))
+                    {
+                        // If the word was already matched, keep it stricken through
+                        resultText += $"<s>{word}</s> ";
+                    }
+                    else if (processedText.Contains(word))
+                    {
+                        print("Text has matched" + word);
+                        matchedWords.Add(word.ToLower());
+                        resultText += $"<s>{word}</s> ";
+                    }
+                    else
+                    {
+                        print("Text doesnt Match" + word);
+                        numbError++;
+                        resultText += $"{word} ";
+                        allMatched = false;
+                    }
                 }
-                else if (processedText.Contains(word))
+                if (allMatched)
                 {
-                    print("Text has matched" + word);
-                    matchedWords.Add(word.ToLower());
-                    resultText += $"<s>{word}</s> ";
+                    print("All words matched! Resetting for the next segment...");
+                    matchedWords.Clear(); // Reset matched words list
+                    awaitingNext = true;
                 }
-                else
+                // Trim any trailing space
+                resultText = resultText.Trim();
+                // Assign new text to both Text fields
+                fadeText.text1.text = resultText;
+                fadeText.text2.text = resultText;
+                if (numbError > 0)
                 {
-                    print("Text doesnt Match" + word);
-                    numbError++;
-                    resultText += $"{word} ";
-                    allMatched = false;
-                }
-            }
-            if (allMatched)
-            {
-                print("All words matched! Resetting for the next segment...");
-                matchedWords.Clear(); // Reset matched words list
-            }
-            // Trim any trailing space
-            resultText = resultText.Trim();
-            // Assign new text to both Text fields
-            fadeText.text1.text = resultText;
-            fadeText.text2.text = resultText;
-            if (numbError > 0)
-            {
-                CanAdvance = false;
-                Walkable.color = Invisible;
-            }
-            else
-            {
-                print("Story can proceed");
-                CurrentSegment++;
-                if (CurrentSegment % 2 == 0)
-                {
-                    CanAdvance = true;
-                    fadeText.StartFadeOut1();
-                    fadeText.StartFadeIn2();
-                    //Change text in fields back to Actual story
-                    fadeText.text1.text = Story[CurrentSegment];
-                    Walkable.color = visible;
-                    fadeText.text2.text = Story[CurrentSegment + 1];
-                    print("Appearing 2");
+                    CanAdvance = false;
                 }
                 else
                 {
-                    print("Appearing 1");
+                    print("Story can proceed");
                     CanAdvance = true;
-                    fadeText.StartFadeOut2();
-                    fadeText.StartFadeIn1();
-                    //Change text in fields back to Actual story
-                    fadeText.text1.text = Story[CurrentSegment];
-                    Walkable.color = visible;
-                    fadeText.text2.text = Story[CurrentSegment + 1];
                 }
             }
         }

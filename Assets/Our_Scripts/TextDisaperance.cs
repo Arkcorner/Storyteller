@@ -9,7 +9,7 @@ public class TextDisaperance : MonoBehaviour
     public TMP_Text text1; // Assign your UI Text component
     public TMP_Text text2; // Assign your UI Text component
 
-    public float fadeDuration = 2f;
+    public float fadeDuration = 0.5f;
 
     void Start()
     {
@@ -50,6 +50,7 @@ public class TextDisaperance : MonoBehaviour
         }
 
         text.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f); // Ensure it's fully transparent
+        print("text fully Diapeared");
     }
     private IEnumerator FadeInText(TMP_Text text)
     {
@@ -65,5 +66,6 @@ public class TextDisaperance : MonoBehaviour
         }
 
         text.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1f); // Ensure it's fully Visible
+        print("text fully appeared");
     }
 }
