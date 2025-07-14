@@ -14,7 +14,7 @@ namespace Whisper.Samples
 
         public string[][] StorySegments = new string[][]
         {
-            new string[] { "the", "wind", "swept", "through", "the", "ancient", "remains" },
+            new string[] { "der", "wind", "flog", "durch", "die", "alte", "ruine" },
             new string[] { "the","trees", "cracked", "like", "whispers", "from", "the", "past" },
             new string[] { "a", "thick", "mist", "coiled", "around", "broken", "stones", "and", "forgotten", "pathways", "from", "long", "ago" },
             new string[] { "at", "the", "edge", "stood", "leo", "his", "boots", "worn", "from", "miles", "of", "travel", "determination", "filled", "his", "heart" },
@@ -40,7 +40,7 @@ namespace Whisper.Samples
         };
         public string[] Story =
         {
-            "The wind swept through the ancient remains.",
+            "Der Wind Flog durch die alte Ruine",
             "The trees cracked like whispers from the past.",
             "A thick mist coiled around broken stones and forgotten pathways from long ago.",
             "At the edge stood Leo, his boots worn from miles of travel. Determination filled his heart.",
@@ -66,7 +66,7 @@ namespace Whisper.Samples
         };
         public string[] Story2 =
         {
-            "The wind swept through the ancient remains.",
+            "Der Wind Flog durch die alte Ruine",
             "The trees cracked like whispers from the past.",
             "A thick mist coiled around broken stones and forgotten pathways from long ago.",
             "At the edge stood Leo, his boots worn from miles of travel. Determination filled his heart.",

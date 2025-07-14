@@ -487,8 +487,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3597985087032626102, guid: 3eea307414a5b4f239838da835346c0d, type: 3}
+      propertyPath: language
+      value: de
+      objectReference: {fileID: 0}
+    - target: {fileID: 3597985087032626102, guid: 3eea307414a5b4f239838da835346c0d, type: 3}
       propertyPath: modelPath
-      value: Whisper/ggml-small.en.bin
+      value: Whisper/ggml-small.bin
       objectReference: {fileID: 0}
     - target: {fileID: 5660250559620323839, guid: 3eea307414a5b4f239838da835346c0d, type: 3}
       propertyPath: m_LocalPosition.x
