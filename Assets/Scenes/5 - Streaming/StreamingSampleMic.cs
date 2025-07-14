@@ -12,84 +12,45 @@ namespace Whisper.Samples
     {
         private System.Collections.Generic.HashSet<string> matchedWords = new System.Collections.Generic.HashSet<string>();
 
-        public string[][] StorySegments = new string[][]
-        {
-            new string[] { "der", "wind", "flog", "durch", "die", "alte", "ruine" },
-            new string[] { "the","trees", "cracked", "like", "whispers", "from", "the", "past" },
-            new string[] { "a", "thick", "mist", "coiled", "around", "broken", "stones", "and", "forgotten", "pathways", "from", "long", "ago" },
-            new string[] { "at", "the", "edge", "stood", "leo", "his", "boots", "worn", "from", "miles", "of", "travel", "determination", "filled", "his", "heart" },
-            new string[] { "beyond", "the", "ruins", "lay", "the", "lost", "library", "holding", "knowledge", "that", "could", "change", "everything" },
-            new string[] { "he", "stepped", "through", "ivy","covered", "arches", "roots", "wove", "through", "cracked", "stone", "like", "grasping", "fingers" },
-            new string[] { "the", "mist", "thickened", "shifting", "like", "a", "living", "thing", "many", "had", "sought", "the", "library", "none", "returned", "the", "same" },
-            new string[] { "the", "ruins", "led", "to", "a", "dark", "grove", "where", "an", "ancient", "tree", "stood" },
-            new string[] { "its", "twisted", "bark", "and", "sprawling", "roots", "formed", "a", "gate" },
-            new string[] { "to", "pass", "one", "had", "to", "give", "a", "truth", "buried", "deep", "within", "the", "heart" },
-            new string[] { "leo", "spoke", "his", "truth", "and", "the", "roots", "parted" },
-            new string[] { "beyond", "stood", "a", "stone", "door", "covered", "in", "glowing", "symbols" },
-            new string[] { "a", "riddle", "was", "carved", "at", "the", "top", "he", "studied", "it", "carefully", "the", "answer", "was", "silence" },
-            new string[] { "the", "door", "groaned", "open" },
-            new string[] { "inside", "the", "path", "split" },
-            new string[] { "to", "the", "left", "a", "golden", "chest", "with", "a", "gleaming", "sword", "atop", "it" },
-            new string[] { "to", "the", "right", "an", "old", "book", "on", "a", "pedestal", "its", "cover", "worn", "but", "pulsing", "with", "quiet", "power" },
-            new string[] { "he", "made", "his", "choice", "and", "walked", "on" },
-            new string[] { "finally", "he", "smelled", "old", "paper" },
-            new string[] { "the", "lost", "library", "stood", "before", "him", "its", "great", "doors", "creaking", "open" },
-            new string[] { "shelves", "stretched", "endlessly", "into", "shadows" },
-            new string[] { "leo", "stepped", "inside" },
-            new string[] { "the", "real", "journey", "had", "only", "just", "begun" }
+        public string[][] StorySegments = new string[][] {
+            new string[] { "es", "war", "einmal", "ein", "mutiger", "junge", "namens", "leo", "der", "die", "verlorene", "bibliothek", "mit", "ihrem", "uralten", "wissen", "suchte" },
+            new string[] { "er", "wanderte", "durch", "neblige", "ruinen", "bis", "zu", "einem", "dunklen", "hain" },
+            new string[] { "dort", "stand", "ein", "uralter", "baum", "dessen", "wurzeln", "ein", "tor", "bildeten" },
+            new string[] { "sag", "eine", "wahrheit", "aus", "deinem", "herzen", "sprach", "der", "baum" },
+            new string[] { "leo", "antwortete", "ich", "suche", "wissen", "nicht", "macht" },
+            new string[] { "die", "wurzeln", "öffneten", "sich" },
+            new string[] { "dahinter", "war", "eine", "steinerne", "tür", "mit", "einem", "rätsel" },
+            new string[] { "leo", "dachte", "nach", "und", "schwieg", "das", "war", "die", "antwort" },
+            new string[] { "die", "tür", "öffnete", "sich" },
+            new string[] { "drinnen", "teilte", "sich", "der", "weg" },
+            new string[] { "links", "eine", "goldene", "truhe", "mit", "einem", "glänzenden", "schwert" },
+            new string[] { "rechts", "ein", "altes", "buch", "das", "sanft", "leuchtete" },
+            new string[] { "leo", "erinnerte", "sich", "an", "seine", "wahrheit", "und", "wählte", "das", "buch" },
+            new string[] { "das", "buch", "führte", "ihn", "zur", "bibliothek" },
+            new string[] { "die", "großen", "türen", "öffneten", "sich" },
+            new string[] { "leo", "trat", "ein", "sein", "abenteuer", "mit", "dem", "wahren", "schatz", "dem", "wissen", "begann" },
+            new string[] { "und", "wenn", "er", "nicht", "gestorben", "ist", "dann", "lernt", "er", "noch", "heute", "aus", "den", "büchern", "der", "magischen", "bibliothek" }
         };
-        public string[] Story =
-        {
-            "Der Wind Flog durch die alte Ruine",
-            "The trees cracked like whispers from the past.",
-            "A thick mist coiled around broken stones and forgotten pathways from long ago.",
-            "At the edge stood Leo, his boots worn from miles of travel. Determination filled his heart.",
-            "Beyond the ruins lay the Lost Library, holding knowledge that could change everything.",
-            "He stepped through ivy covered arches. Roots wove through cracked stone like grasping fingers.",
-            "The mist thickened, shifting like a living thing. Many had sought the library; none returned the same.",
-            "The ruins led to a dark grove where an Ancient Tree stood.",
-            "Its twisted bark and sprawling roots formed a gate.",
-            "To pass, one had to give a truth buried deep within the heart.",
-            "Leo spoke his truth and the roots parted.",
-            "Beyond stood a Stone Door covered in glowing symbols.",
-            "A riddle was carved at the top.He studied it carefully - the answer was silence.",
-            "The door groaned open.",
-            "Inside, the path split.",
-            "To the left, a golden chest with a gleaming sword atop it.",
-            "To the right, an old book on a pedestal, its cover worn but pulsing with quiet power.",
-            "He made his choice and walked on.",
-            "Finally, he smelled old paper.",
-            "The Lost Library stood before him, its great doors creaking open.",
-            "Shelves stretched endlessly into shadows.",
-            "Leo stepped inside.",
-            "The real journey had only just begun."
+        public string[] Story = {
+            "Es war einmal ein mutiger Junge namens Leo, der die Verlorene Bibliothek mit ihrem uralten Wissen suchte.",
+            "Er wanderte durch neblige Ruinen bis zu einem dunklen Hain.",
+            "Dort stand ein uralter Baum, dessen Wurzeln ein Tor bildeten.",
+            "Sag eine Wahrheit aus deinem Herzen, sprach der Baum.",
+            "Leo antwortete: Ich suche Wissen, nicht Macht.",
+            "Die Wurzeln öffneten sich.",
+            "Dahinter war eine steinerne Tür mit einem Rätsel.",
+            "Leo dachte nach und schwieg - das war die Antwort.",
+            "Die Tür öffnete sich.",
+            "Drinnen teilte sich der Weg.",
+            "Links eine goldene Truhe mit einem glänzenden Schwert.",
+            "Rechts ein altes Buch, das sanft leuchtete.",
+            "Leo erinnerte sich an seine Wahrheit und wählte das Buch.",
+            "Das Buch führte ihn zur Bibliothek.",
+            "Die großen Türen öffneten sich.",
+            "Leo trat ein - sein Abenteuer mit dem wahren Schatz, dem Wissen, begann.",
+            "Und wenn er nicht gestorben ist, dann lernt er noch heute aus den Büchern der magischen Bibliothek."
         };
-        public string[] Story2 =
-        {
-            "Der Wind Flog durch die alte Ruine",
-            "The trees cracked like whispers from the past.",
-            "A thick mist coiled around broken stones and forgotten pathways from long ago.",
-            "At the edge stood Leo, his boots worn from miles of travel. Determination filled his heart.",
-            "Beyond the ruins lay the Lost Library, holding knowledge that could change everything.",
-            "He stepped through ivy covered arches. Roots wove through cracked stone like grasping fingers.",
-            "The mist thickened, shifting like a living thing. Many had sought the library; none returned the same.",
-            "The ruins led to a dark grove where an Ancient Tree stood.",
-            "Its twisted bark and sprawling roots formed a gate.",
-            "To pass, one had to give a truth buried deep within the heart.",
-            "Leo spoke his truth and the roots parted.",
-            "Beyond stood a Stone Door covered in glowing symbols.",
-            "A riddle was carved at the top.He studied it carefully - the answer was silence.",
-            "The door groaned open.",
-            "Inside, the path split.",
-            "To the left, a golden chest with a gleaming sword atop it.",
-            "To the right, an old book on a pedestal, its cover worn but pulsing with quiet power.",
-            "He made his choice and walked on.",
-            "Finally, he smelled old paper.",
-            "The Lost Library stood before him, its great doors creaking open.",
-            "Shelves stretched endlessly into shadows.",
-            "Leo stepped inside.",
-            "The real journey had only just begun."
-        };
+
         public Color visible = new Color(1f, 1f, 1f, 0f);
         public Color Invisible = new Color(1f, 1f, 1f, 0f);
         public TextDisaperance fadeText;
@@ -158,7 +119,6 @@ namespace Whisper.Samples
             //Unity is my curse and this Code needing to exist is its proof damned be the Unity Gods
             print("This is the Story" + Story.Length);
             Story = Story;
-            print("This is the Story" + Story2.Length);
 
         }
 
@@ -222,7 +182,8 @@ namespace Whisper.Samples
                     }
                     else
                     {
-                        print("Text doesnt Match" + word);
+                        print("Actual "+processedText);
+                        print("Expected " + word);
                         numbError++;
                         resultText += $"{word} ";
                         allMatched = false;
